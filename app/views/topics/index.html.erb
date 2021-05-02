@@ -1,0 +1,33 @@
+<div class="topic-index-wrapper">
+  <div class="container">
+    <% @topics.each do |topic| %>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="topic-index-single">
+            <h2 class="topic-author">
+              <%= topic.user.name %>
+            </h2>
+            <%= image_tag topic.image.url %>
+            <ul class="pl-0">
+              <li style="display: inline;" class="topic_<%= topic.id %>">
+                <% #いいね部分のテンプレートファイル_like.html.erbに変数topicをtopicという名前で渡す %>
+                <%= render 'favorites/like', topic: topic %>
+              </li>
+              
+              <li style="display: inline;">
+                <%= link_to comments_index_path, method: :get do %> 
+                  <%= image_tag 'icons/comment.png', class:
+                  'topic-index-icon-comment' %>
+                <% end %>
+              </li>
+      
+            </ul>
+            <p class="topic-text">
+              <%= topic.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

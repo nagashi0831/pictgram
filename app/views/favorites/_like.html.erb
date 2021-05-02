@@ -1,0 +1,13 @@
+<%# いいねしていない場合 *favorite_usersはtopicモデルで定義しているメソッド　%>
+<% if !topic.favorite_users.include?(current_user) %>
+  <%= link_to favorites_path(topic_id: topic.id), method: :post, remote: true do %>
+    <%= image_tag 'icons/heart-black.png', class: 
+    'topic-index-icon-nonLike' %>
+  <% end %>
+<%# いいねしている場合 %>
+<% else %>
+  <%= link_to favorites_path(topic_id: topic.id), method: :delete, remote: true do %>
+    <%= image_tag 'icons/heart-black.png', class:
+    'topic-index-icon-like' %>
+  <% end %>
+<% end %>
