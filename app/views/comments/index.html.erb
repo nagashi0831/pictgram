@@ -1,1 +1,49 @@
-<h1>コメントページです</h1>
+<% content_for :css do %>
+  <%= stylesheet_link_tag "comments" %>
+<% end %>
+<div class="topic-index-wrapper">
+  <h2>コメント画面</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="topic-index-single">
+          <h2 class="topic-author">
+            <%= @topic.user.name %>
+          </h2>
+          <%= image_tag @topic.image.url %>
+          <ul class="topic-b-item pl-0">
+            <li style="display: inline;" class="topic_<%= @topic.id %>">
+              <% #いいね部分のテンプレートファイル_like.html.erbに変数topicをtopicという名前で渡す %>
+              <%= render "favorites/like", topic: @topic %>
+            </li>
+          </ul>
+          <p class="topic-text">
+            <%= @topic.description %>
+          </p>
+          <% @comments.each do |comment| %>
+            <div class="row">
+              <div class="col-md-3">
+                <%= comment.user.name %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <%= comment.description %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-md-12">
+              <%= form_for @comment do |f| %>
+                <%= f.label :comment %>
+                <%= f.text_area :description, class: "form-control" %>
+                <%= f.hidden_field :topic_id, :value => @topic.id %>
+                <%= f.submit "投稿", class: 'btn btn-black btn-block' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

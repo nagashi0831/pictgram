@@ -15,7 +15,7 @@
               </li>
               
               <li style="display: inline;">
-                <%= link_to comments_index_path, method: :get do %> 
+                <%= link_to comments_index_path(topic_id: topic.id), method: :get do %> 
                   <%= image_tag 'icons/comment.png', class:
                   'topic-index-icon-comment' %>
                 <% end %>

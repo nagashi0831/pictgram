@@ -24,6 +24,8 @@ class FavoritesController < ApplicationController
   private
   
   def topic_params
-    @topic = Topic.find(params[:topic_id])
+    if params[:topic_id]
+      @topic = Topic.find(params[:topic_id])
+    end
   end
 end
