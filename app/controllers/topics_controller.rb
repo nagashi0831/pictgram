@@ -19,9 +19,10 @@ class TopicsController < ApplicationController
     end
   end
     
-    private
-    def topic_params
-      #requireとは
-      params.require(:topic).permit(:image, :description)
-    end
+  #ストロストロングパラメータによりimage、descriptionパラメータ以外をシャットアウト
+  private
+  def topic_params
+    #requireとは
+    params.require(:topic).permit(:image, :description)
+  end
 end
